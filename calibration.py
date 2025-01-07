@@ -7,8 +7,6 @@ from scipy import optimize
 import pandas as pd
 
 def get_disparity_plot(disp,low=0.4,height=5):
-    # 視差の閾値
-
     # lowより大きいor小さい視差を取得
     masked_array = np.where(disp > low, disp, np.nan)
     masked_array_neg =  np.where(disp < -low, disp, np.nan)
@@ -39,7 +37,7 @@ def residuals(params, x,y):
 def main():
     print("===== START =====")
     # load image from images folder
-    image_file_paths = [f for f in os.listdir('images') if f.endswith(('.jpg', '.jpeg'))]
+    image_file_paths = [f for f in os.listdir('images/train') if f.endswith(('.jpg', '.jpeg'))]
     
     # パラメータを格納するDataFrame(左から、ゼロ視差、ゼロ視差(負の値)、直線近似の傾き、直線近似の傾き(負の値))
     df_params = pd.DataFrame(columns=['depth','zero_disp','zero_disp_neg','a','a_neg'])
@@ -55,7 +53,7 @@ def main():
 
     for path in image_file_paths:
         print("===== " + path + " =====")
-        image = cv2.imread('images/' + path)
+        image = cv2.imread('images/train/' + path)
         image = cv2.resize(image, (352, 528))
 
         # 距離情報を取得
@@ -123,6 +121,8 @@ def main():
         plt.scatter(disp_plot_neg,range(height))
         plt.xlim(-6,6)
         plt.ylim(0,height)
+        plt.xlabel("Disparity")
+        plt.ylabel("y-coordinate")
         plt.show()
     print("===== END =====")
     df_params.to_csv('csv/params.csv')

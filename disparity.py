@@ -50,7 +50,7 @@ def detectEdge(src, dtype, direction=EdgeDirection.BOTH, th_value=0):
 
     return dst
 
-def calcDisparityByZNCC(std_img, tmp_img, kernel_size, search_range_x):
+def calcDisparityByZNCC(std_img, tmp_img, kernel_size, search_range_x,th_value=35):
     if len(std_img.shape) != 2 or len(tmp_img.shape) != 2:
         raise ValueError("入力画像は1チャンネルの画像を入力してください")
     
@@ -58,7 +58,7 @@ def calcDisparityByZNCC(std_img, tmp_img, kernel_size, search_range_x):
     s_range = (search_range_x - 1) // 2
 
     d_map = np.zeros(std_img.shape, dtype=np.float32)
-    edge = detectEdge(std_img, np.uint8, direction=EdgeDirection.VERTICAL, th_value=35)
+    edge = detectEdge(std_img, np.uint8, direction=EdgeDirection.VERTICAL, th_value=th_value)
 
     # エッジ検出 (仮にソーベルのみを使う)
     edge_std_img = cv2.Sobel(std_img, cv2.CV_32F, 1, 0)
