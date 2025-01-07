@@ -24,7 +24,6 @@ def main():
     fig.colorbar(im, ax=ax)
     plt.show()
 
-    # d_map = np.zeros(std_img.shape, dtype=np.float32)
     depth_map = np.zeros(disp.shape, dtype=np.float32)
     error_map = np.zeros(disp.shape, dtype=np.float32)
 
@@ -42,7 +41,7 @@ def main():
     error_list = []
 
 
-    # ピクセル単位の計算
+    # ===画素単位で距離算出===
     for y in range(0, disp.shape[0]):
         for x in range(0, disp.shape[1]):
             d = disp[y, x]
@@ -55,7 +54,6 @@ def main():
                         error_map[y, x] = error
                         depth_list.append(z)
                         error_list.append(error)
-                    # print(f"z: {z}, error: {error}")
                 elif d < 0 and abs(d) <= 5:
                     z = v_neg / (float(y) - a_neg*d - u_neg) + w_neg
                     if z > 0 and z < 3000:
@@ -64,12 +62,14 @@ def main():
                         error_map[y, x] = error
                         depth_list.append(z)
                         error_list.append(error)
-                        # print(f"z: {z}, error: {error}")
 
     # ===平均距離値と絶対平均誤差を表示===
     mean_depth = np.mean(depth_list)
     mean_error = np.mean(error_list)
+    unique, freq = np.unique(depth_list,return_counts=True)
+    mode = unique[np.argmax(freq)]
     print(f"平均推定距離値（mm）: {mean_depth}")
+    print(f"推定距離値の最頻値（mm）: {mode}")
     print(f"絶対平均誤差（mm）: {mean_error}")
 
     # ===ヒストグラムを表示する===
