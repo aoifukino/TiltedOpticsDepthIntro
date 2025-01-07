@@ -49,22 +49,30 @@ def main():
             if d != 0:
                 if d > 0 and abs(d) <= 5:
                     z = v / (float(y) - a*d - u) + w
-                    error = abs(z - correct_depth)
-                    depth_map[y, x] = z
-                    error_map[y, x] = error
-                    depth_list.append(z)
-                    error_list.append(error)
+                    if z > 0 and z < 3000:
+                        error = abs(z - correct_depth)
+                        depth_map[y, x] = z
+                        error_map[y, x] = error
+                        depth_list.append(z)
+                        error_list.append(error)
+                    # print(f"z: {z}, error: {error}")
                 elif d < 0 and abs(d) <= 5:
                     z = v_neg / (float(y) - a_neg*d - u_neg) + w_neg
-                    error = abs(z - correct_depth)
-                    depth_map[y, x] = z
-                    error_map[y, x] = error
-                    depth_list.append(z)
-                    error_list.append(error)
+                    if z > 0 and z < 3000:
+                        error = abs(z - correct_depth)
+                        depth_map[y, x] = z
+                        error_map[y, x] = error
+                        depth_list.append(z)
+                        error_list.append(error)
+                        # print(f"z: {z}, error: {error}")
 
     # ===平均距離値と絶対平均誤差を表示===
     mean_depth = np.mean(depth_list)
     mean_error = np.mean(error_list)
+    # max error and index
+    max_error = np.max(error_list)
+    max_error_index = error_list.index(max_error)
+    print(f"最大誤差（mm）: {max_error}, index: {max_error_index}")
     print(f"平均推定距離値（mm）: {mean_depth}")
     print(f"絶対平均誤差（mm）: {mean_error}")
 
