@@ -69,10 +69,6 @@ def main():
     # ===平均距離値と絶対平均誤差を表示===
     mean_depth = np.mean(depth_list)
     mean_error = np.mean(error_list)
-    # max error and index
-    max_error = np.max(error_list)
-    max_error_index = error_list.index(max_error)
-    print(f"最大誤差（mm）: {max_error}, index: {max_error_index}")
     print(f"平均推定距離値（mm）: {mean_depth}")
     print(f"絶対平均誤差（mm）: {mean_error}")
 
