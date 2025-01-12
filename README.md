@@ -103,6 +103,6 @@ $\overline{a_b} = -42.9284$
 ![](resource/depth_map_and_error_map.png)
 
 ## 参考文献
-[1]H. Michi, H. Ikeoka, and T. Hamamoto, “Distance estimation using two different-aperture images obtained by tilted lens optics camera,” 2012 International Symposium on Intelligent Signal Processing and Communications Systems, pp. 749-754, 2012.  
+[1] H. Michi, H. Ikeoka, and T. Hamamoto, “Distance estimation using two different-aperture images obtained by tilted lens optics camera,” 2012 International Symposium on Intelligent Signal Processing and Communications Systems, pp. 749-754, 2012.  
 [2] H. Addison, P. Eunbyung, and K. Wendy, ImageNet Object Localization Challenge. Kaggle. https://kaggle.com/competitions/imagenet-object
 localization-challenge, 2018. 
