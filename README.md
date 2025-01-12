@@ -64,7 +64,7 @@ $y=ad+b...(1)$
 実装ではparams.csvに記録されている。
 
 ## 3. 参照式の作成
-距離推定式は次のようになる  
+今回の実装では、Michiらによって提案された直線近似を使用した場合の距離推定式[1]を用いる  
 $z=v_i/(y-\overline{a_i}d-u_i)+w_i,i=f,b...(2)$  
 なお、 $z$は距離値、 $y$はｙ座標、 $d$は視差、 $\overline{a}$は各距離の直線の傾きの平均値、 $v$、 $u$、 $w$はパラメータ、 $i$は前ぼけ（ $f$ ）もしくは後ろけ（ $b$ ）を表す。
 
@@ -88,7 +88,7 @@ $\overline{a_b} = -42.9284$
 [depth.py](./depth.py)に実装。  
 [セクション3](#3-参照式の作成)で得た8つのパラメータ、注目画素の視差とy座標を式(2)に入力することで距離マップを得る。
 
-テスト用画像としてImageNet Dataset[1]から抽出した画像をターゲットボードに貼り付け撮影したものを使用する。  
+テスト用画像としてImageNet Dataset[2]から抽出した画像をターゲットボードに貼り付け撮影したものを使用する。  
 ![](resource/test_image.jpg)  
 なお、正解距離は1934mmである。
 
@@ -103,5 +103,6 @@ $\overline{a_b} = -42.9284$
 ![](resource/depth_map_and_error_map.png)
 
 ## 参考文献
-[1] H. Addison, P. Eunbyung, and K. Wendy, ImageNet Object Localization Challenge. Kaggle. https://kaggle.com/competitions/imagenet-object
+[1]H. Michi, H. Ikeoka, and T. Hamamoto, “Distance estimation using two different-aperture images obtained by tilted lens optics camera,” 2012 International Symposium on Intelligent Signal Processing and Communications Systems, pp. 749-754, 2012.  
+[2] H. Addison, P. Eunbyung, and K. Wendy, ImageNet Object Localization Challenge. Kaggle. https://kaggle.com/competitions/imagenet-object
 localization-challenge, 2018. 
